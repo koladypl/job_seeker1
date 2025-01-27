@@ -7,6 +7,6 @@ class ThemeProvider with ChangeNotifier {
 
   void changeTheme(ThemeMode themeMode) {
     _themeMode = themeMode;
-    notifyListeners(); // Powiadomienie wszystkich słuchaczy o zmianie
+    notifyListeners(); 
   }
 }
