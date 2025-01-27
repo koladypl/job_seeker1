@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_seeker/job_offer.dart'; // Model oferty pracy
+import 'package:job_seeker/job_offer.dart'; 
 
 class JobOfferSearchDelegate extends SearchDelegate {
   final List<JobOffer> jobOffers = []; 
