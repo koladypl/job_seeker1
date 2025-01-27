@@ -21,30 +21,30 @@ class _JobOffersListScreenState extends State<JobOffersListScreen> {
   @override
   void initState() {
     super.initState();
-    jobOffers = ApiService.fetchJobOffers(); // Pobierz oferty z API
+    jobOffers = ApiService.fetchJobOffers(); 
 
     jobOffers.then((offers) {
       setState(() {
-        filteredJobOffers = offers;  // Ustaw domyślne oferty na wszystkie pobrane
+        filteredJobOffers = offers;  
       });
     });
 
-    // Nasłuchiwanie zmian w polu wyszukiwania
+   
     searchController.addListener(_filterSearchResults);
   }
 
-  // Funkcja czyszcząca tekst z HTML
+ 
   String cleanDescription(String description) {
     final document = html_parser.parse(description);
-    final cleanText = document.body?.text ?? ''; // Zwraca tylko tekst, bez tagów HTML
+    final cleanText = document.body?.text ?? '';
     
     // Usuwamy wszystkie style i inne niepotrzebne elementy
-    final cleanedDescription = cleanText.replaceAll(RegExp(r'[\n\r\t]'), ' ').trim(); // Usuwamy zbędne białe znaki
+    final cleanedDescription = cleanText.replaceAll(RegExp(r'[\n\r\t]'), ' ').trim(); 
 
     return cleanedDescription;
   }
 
-  // Funkcja filtrująca oferty na podstawie wyszukiwania
+  
   void _filterSearchResults() {
     setState(() {
       filteredJobOffers = filteredJobOffers.where((jobOffer) {
@@ -61,10 +61,10 @@ class _JobOffersListScreenState extends State<JobOffersListScreen> {
         title: Row(
           children: [
             Image.asset(
-              'assets/images/job_logo.png',  // Dodaj swoje zdjęcie do folderu assets/images/
-              height: 40.0,  // Dopasuj rozmiar obrazka
+              'assets/images/job_logo.png',  
+              height: 40.0,  
             ),
-            SizedBox(width: 10), // Odstęp pomiędzy obrazkiem a tytułem
+            SizedBox(width: 10), 
             Text('I am looking for a job'),
           ],
         ),
@@ -96,7 +96,7 @@ class _JobOffersListScreenState extends State<JobOffersListScreen> {
           ),
           Expanded(
             child: FutureBuilder<List<JobOffer>>(
-              future: jobOffers, // Pobieramy dane z API
+              future: jobOffers, // tu musze pobrac z niemieckiego api
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
@@ -107,7 +107,6 @@ class _JobOffersListScreenState extends State<JobOffersListScreen> {
                 } else {
                   final jobOffers = snapshot.data!;
 
-                  // Jeżeli nie mamy jeszcze filtrowanych ofert, ustawiamy wszystkie oferty
                   if (filteredJobOffers.isEmpty) {
                     filteredJobOffers = jobOffers;
                   }
@@ -116,8 +115,7 @@ class _JobOffersListScreenState extends State<JobOffersListScreen> {
                     itemCount: filteredJobOffers.length,
                     itemBuilder: (context, index) {
                       final jobOffer = filteredJobOffers[index];
-
-                      // Usuwamy HTML z opisu
+                      
                       String cleanDesc = cleanDescription(jobOffer.description);
 
                       return Padding(
@@ -136,7 +134,7 @@ class _JobOffersListScreenState extends State<JobOffersListScreen> {
                                     title: jobOffer.title,
                                     companyName: jobOffer.companyName,
                                     location: jobOffer.location,
-                                    description: cleanDesc, // Przekazujemy oczyszczony opis
+                                    description: cleanDesc, 
                                     salary: jobOffer.salary,
                                   ),
                                 ),
