@@ -16,15 +16,14 @@ class JobOffer {
   });
 
   factory JobOffer.fromJson(Map<String, dynamic> json) {
-    // Dekodowanie HTML w opisie za pomocą html_unescape
     final unescape = HtmlUnescape();
-    final description = unescape.convert(json['description'] ?? '');  // Usunięcie HTML
+    final description = unescape.convert(json['description'] ?? '');  
 
     return JobOffer(
       title: json['title'] ?? '',
       companyName: json['company_name'] ?? '',
       location: json['location'] ?? '',
-      description: description,  // Przypisanie czystego tekstu
+      description: description, 
       salary: json['salary'] ?? 'Not specified',
     );
   }
